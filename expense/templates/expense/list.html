@@ -1,0 +1,69 @@
+<!-- ./player/templates/player/list.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Expense List</title>
+<style>
+  body {
+    background-image: url('https://jvcppbucket.s3.amazonaws.com/expense');
+    background-size: cover; /* or "contain" depending on your preference */
+    background-position: center;
+    color: white; /* Set text color to white for better visibility */
+  }
+  /* Adjust table styles to make it visible */
+ 
+  
+  table, th, td {
+  border-color: white;
+  background-color: black;
+}
+
+</style>
+{% endblock title %}
+
+{% block content %}
+<h1 style="text-align: center;">Expense Tracker</h1>
+
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date</th>
+      <th scope="col">More:</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for expense in expenses %}
+    <tr>
+      <th scope="row"style="color: white;">{{ expense.expense_name }}</th>
+      <td style="color: white;">{{ expense.expense_category }}</td>
+      <td style="color: white;">{{ expense.description }}</td>
+      <td style="color: white;">{{ expense.amount }}</td>
+      <td style="color: white;">{{ expense.date }}</td>
+      <td>
+        <a href="{% url 'edit-expense' expense.id %}" class="btn btn-sm btn-primary">Edit</a>
+        <a href="{% url 'delete-expense' expense.id %}" class="btn btn-sm btn-danger">Remove</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="text-center">
+ 
+  <a href="{% url 'create-expense' %}">
+  <button type="button" class="btn btn-danger" style="background-color: #f44336; border-color: #f44336; color: white; font-weight: bold; padding: 10px 20px; border-radius: 5px;">Add New Info</button>
+</a>
+
+
+</a>
+</div>
+<div style="margin-top: 20px; text-align: right;">
+  <strong>Total Amount: €{{ total_amount }}</strong>
+</div>
+
+{% endblock content %}
