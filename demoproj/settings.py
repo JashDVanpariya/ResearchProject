@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-u9$p(r*6i_g4atjk(k%)sp7*s-6g@m5jxwe@6c48ciu%_t&bf*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '83226dade9d64fecbfb8782ef8847e8d.vfs.cloud9.us-east-1.amazonaws.com','expenseapp-env.eba-2tbxwga9.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+
 CSRF_TRUSTED_ORIGINS =["https://83226dade9d64fecbfb8782ef8847e8d.vfs.cloud9.us-east-1.amazonaws.com"]
 # Application definition
 
@@ -74,16 +75,16 @@ WSGI_APPLICATION = 'demoproj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 DATABASES = {
-     'default': {
-         'ENGINE':'django.db.backends.postgresql_psycopg2',
-         'NAME':'rdsdatabase',
-         'USER':'postgres',
-         'PASSWORD':'postgres',
-         'HOST':'database1.czem2egi0cpt.us-east-1.rds.amazonaws.com',
-         'PORT':'5432'
-     }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # This should now work
+    }
 }
 
 

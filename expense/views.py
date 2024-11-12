@@ -2,14 +2,15 @@ import os
 from django.shortcuts import render, redirect
 from .models import Expense
 from .forms import ExpenseForm
-from demoproj.pythonlibrary.pythonlibrary.expense import calculate_total_expenses
+#from demoproj.pythonlibrary.pythonlibrary.expense import calculate_total_expenses
+from expensetrackerlib import tracker
 
 
 
 
 def expenses_list(request):
     expenses = Expense.objects.all()
-    total_amount = calculate_total_expenses(expenses)
+    total_amount =tracker.calculate_total_expenses(expenses)
     context = {
         'expenses': expenses,
         'total_amount': total_amount,
